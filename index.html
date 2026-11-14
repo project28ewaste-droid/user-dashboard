@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b16">
+  <title>EcoVault | E-Waste Rewards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <!-- LOGIN / SIGNUP -->
+  <section id="login" class="login-screen">
+    <div class="login-art">
+      <div class="brand"><span class="brand-icon">♻</span> ECOVAULT</div>
+      <div class="art-copy">
+        <span class="eyebrow">GIVE ELECTRONICS A SECOND LIFE</span>
+        <h1>Turn e-waste<br>into <span>good energy.</span></h1>
+        <p>Recycle old electronics responsibly. Track every deposit and earn rewards while keeping harmful e-waste out of landfills.</p>
+        <div class="art-tags">
+          <span>▣ Circuit boards</span><span>⌁ Cables</span><span>▤ Batteries</span>
+        </div>
+      </div>
+      <div class="scrap-art" aria-hidden="true">
+        <div class="circuit-line line-a"></div><div class="circuit-line line-b"></div>
+        <div class="chip"><span>♻</span><small>RECYCLE</small></div>
+        <div class="scrap scrap-one">▦</div><div class="scrap scrap-two">⌁</div>
+        <div class="scrap scrap-three">▣</div>
+        <div class="art-caption">LESS WASTE <b>•</b> MORE FUTURE</div>
+      </div>
+      <div class="login-footer">E-WASTE COLLECTION & REWARD PLATFORM</div>
+    </div>
+
+    <div class="login-panel">
+      <div class="mobile-brand"><span>♻</span> ECOVAULT</div>
+      <div class="auth-box">
+        <span class="eyebrow">WELCOME TO THE GREEN SIDE</span>
+        <h2 id="authTitle">Welcome back</h2>
+        <p id="authSubtitle" class="muted">Sign in to continue to your recycling dashboard.</p>
+
+        <button type="button" id="google" class="google-button">
+          <span class="google-mark">G</span> Continue with Google
+        </button>
+        <div class="separator"><span>or use your email</span></div>
+
+        <div class="auth-tabs">
+          <button type="button" id="tabLogin" class="tab active">Login</button>
+          <button type="button" id="tabSignup" class="tab">Create account</button>
+        </div>
+
+        <form id="form">
+          <label id="nameLabel" class="field" hidden>
+            <span>Full name</span>
+            <input id="name" type="text" placeholder="Enter your name" autocomplete="name">
+          </label>
+          <label class="field">
+            <span>Email address</span>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input id="pass" type="password" placeholder="At least 6 characters" minlength="6" autocomplete="current-password" required>
+          </label>
+          <p id="err" class="error-message" role="alert"></p>
+          <button class="primary-button full-button" id="submit" type="submit">Login to dashboard <span>→</span></button>
+        </form>
+        <p class="auth-note">Demo email accounts are saved only in this browser. Configure Firebase to enable Google sign-in.</p>
+      </div>
+      <div class="panel-bottom">♻ Recycle responsibly. Reward sustainably.</div>
+    </div>
+  </section>
+
+  <!-- USER DASHBOARD -->
+  <section id="app" hidden>
+    <nav class="topbar">
+      <a class="brand nav-brand" href="#"><span class="brand-icon">♻</span> ECOVAULT</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#deposit">New deposit</a>
+        <a href="#rewards">Rewards</a>
+        <a href="#history">History</a>
+      </div>
+      <button id="logout" class="logout-button">Log out ↗</button>
+    </nav>
+
+    <main class="dashboard">
+      <header id="overview" class="welcome-row">
+        <div>
+          <span class="eyebrow">YOUR PERSONAL RECYCLING HUB</span>
+          <h1>Hello, <span id="who">User</span> <span class="wave">👋</span></h1>
+          <p class="muted">Every small device recycled makes a cleaner tomorrow.</p>
+        </div>
+        <div class="bin-pill"><span class="pulse-dot"></span><span id="bin">Demo collection bin</span></div>
+      </header>
+
+      <section class="dashboard-hero">
+        <div class="hero-copy">
+          <span class="eyebrow">YOUR IMPACT STARTS HERE</span>
+          <h2>Don't trash it.<br><span>Recycle it.</span></h2>
+          <p>Deposit batteries, chargers, cables and other small electronics at an EcoVault collection bin. Earn points for every verified deposit.</p>
+          <a class="hero-link" href="#deposit">Start a deposit <span>→</span></a>
+        </div>
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="hero-ring"></div><div class="hero-chip">♻</div>
+          <span class="float-part part-a">▦</span><span class="float-part part-b">⌁</span><span class="float-part part-c">▣</span>
+          <small>REUSE • REPAIR • RECYCLE</small>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>AVAILABLE POINTS</span><span class="stat-icon">✦</span></div><strong id="pts">0</strong><small>Ready to redeem</small></article>
+        <article class="stat-card"><div class="stat-top"><span>TOTAL E-WASTE</span><span class="stat-icon">▤</span></div><strong id="kg">0.00 kg</strong><small>Material diverted from waste</small></article>
+        <article class="stat-card"><div class="stat-top"><span>DEPOSITS MADE</span><span class="stat-icon">♻</span></div><strong id="num">0</strong><small>Successful deposits</small></article>
+        <article class="stat-card"><div class="stat-top"><span>VOUCHER VALUE</span><span class="stat-icon">₹</span></div><strong id="cash">₹0</strong><small>Available reward value</small></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="dashboard-card deposit-card" id="deposit">
+          <div class="section-heading"><div><span class="eyebrow">01 / COLLECTION</span><h2>Make a new deposit</h2></div><span class="card-symbol">▣</span></div>
+          <p class="muted">Follow the steps to deposit your accepted e-waste.</p>
+          <div class="step-line"><span class="step-number">1</span><div><b>Open collection bin</b><small>Request the bin lid to unlock.</small></div></div>
+          <button class="primary-button" id="open">Open bin lid <span>→</span></button>
+          <p id="lidStatus" class="status-message" aria-live="polite">● Bin is waiting for a deposit request.</p>
+          <div id="reading" class="reading-panel" hidden>
+            <div class="step-line"><span class="step-number">2</span><div><b>Enter deposit details</b><small>Demo mode uses manual weight entry.</small></div></div>
+            <label class="field"><span>E-waste category</span>
+              <select id="type">
+                <option>Battery</option><option>Cable / Wire</option><option>Charger</option><option>Earphones</option><option>Mobile phone</option><option>Computer component</option><option>Other small e-waste</option>
+              </select>
+            </label>
+            <label class="field"><span>Measured weight (kg)</span><input id="weight" type="number" min="0.01" max="20" step="0.01" placeholder="Example: 0.25"></label>
+            <button class="primary-button" id="finish">Confirm deposit <span>✓</span></button>
+          </div>
+          <p class="small-note">Demo prototype: live sensor readings and physical lid control require a connected backend and bin controller.</p>
+        </article>
+
+        <article class="dashboard-card rewards-card" id="rewards">
+          <div class="section-heading"><div><span class="eyebrow">02 / REWARD WALLET</span><h2>Recycle. Earn. Redeem.</h2></div><span class="card-symbol">✦</span></div>
+          <div class="voucher-art"><span>♻</span><div><small>ECOVAULT REWARD</small><b>₹5 VOUCHER</b><small>50 POINTS</small></div></div>
+          <p class="muted">Collect points every time you recycle. Redeem 50 points for a sample ₹5 voucher.</p>
+          <button class="outline-button" id="redeem">Redeem 50 points <span>→</span></button>
+          <p id="voucher" class="voucher-message" aria-live="polite"></p>
+          <p class="small-note">Voucher codes generated in demo mode are samples, not live gift cards.</p>
+        </article>
+      </section>
+
+      <section class="dashboard-card history-card" id="history">
+        <div class="section-heading"><div><span class="eyebrow">03 / YOUR ACTIVITY</span><h2>Deposit history</h2></div><span class="card-symbol">▤</span></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>DATE & TIME</th><th>E-WASTE TYPE</th><th>WEIGHT</th><th>POINTS</th></tr></thead><tbody id="rows"></tbody></table>
+        </div>
+      </section>
+      <footer class="dashboard-footer">♻ ECOVAULT <span>Give electronics a second life.</span></footer>
+    </main>
+  </section>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
