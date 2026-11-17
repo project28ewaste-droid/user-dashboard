@@ -157,3 +157,21 @@ th{color:#708575}
 td{color:#405c47}
 .dashboard-footer{color:#708575}
 @media(max-width:850px){.mobile-brand{color:#36543d}}
+
+/* Multi-page dashboard */
+.stats-grid{grid-template-columns:repeat(3,1fr)}
+.page-title{margin-bottom:22px}
+.page-title h1{font:700 31px var(--display);margin:9px 0 2px;letter-spacing:-1px}
+.page-title .muted{font-size:13px;margin:4px 0}
+.page-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.page-links a{text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.nav-links a.active{color:var(--green);font-weight:700;border-bottom:2px solid var(--green);padding-bottom:3px}
+@media(max-width:650px){.stats-grid{grid-template-columns:1fr}.page-title h1{font-size:27px}}
+.page-links .outline-button{width:auto;gap:25px;padding:13px 17px;font-size:13px}
+.single-grid{display:grid;grid-template-columns:minmax(0,720px);gap:15px}
+.page-cta{text-decoration:none;margin-top:16px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.content-grid + .history-card{margin-top:15px}
+.text-link{display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:var(--green);text-decoration:none}
+.text-link:hover{text-decoration:underline}
+.history-card + .page-links{margin-top:15px}

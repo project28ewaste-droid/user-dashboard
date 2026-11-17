@@ -69,7 +69,7 @@
           <p id="err" class="error-message" role="alert"></p>
           <button class="primary-button full-button" id="submit" type="submit">Login to dashboard <span>→</span></button>
         </form>
-        <p class="auth-note">Demo email accounts are saved only in this browser. Configure Firebase to enable Google sign-in.</p>
+        <p class="auth-note">Accounts are secured with Firebase. New Google users get an account automatically.</p>
       </div>
       <div class="panel-bottom">♻ Recycle responsibly. Reward sustainably.</div>
     </div>
@@ -78,18 +78,21 @@
   <!-- USER DASHBOARD -->
   <section id="app" hidden>
     <nav class="topbar">
-      <a class="brand nav-brand" href="#"><span class="brand-icon">♻</span> ECOVAULT</a>
+      <a class="brand nav-brand" href="#overview"><span class="brand-icon">♻</span> ECOVAULT</a>
       <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#deposit">New deposit</a>
-        <a href="#rewards">Rewards</a>
-        <a href="#history">History</a>
+        <a href="#overview" data-nav="overview">Overview</a>
+        <a href="#deposit" data-nav="deposit">Waste entry</a>
+        <a href="#rewards" data-nav="rewards">Rewards</a>
+        <a href="#history" data-nav="history">Waste history</a>
+        <a href="#claims" data-nav="claims">Claim history</a>
       </div>
       <button id="logout" class="logout-button">Log out ↗</button>
     </nav>
 
     <main class="dashboard">
-      <header id="overview" class="welcome-row">
+      <!-- PAGE: OVERVIEW -->
+      <section class="page" data-page="overview">
+      <header class="welcome-row">
         <div>
           <span class="eyebrow">YOUR PERSONAL RECYCLING HUB</span>
           <h1>Hello, <span id="who">User</span> <span class="wave">👋</span></h1>
@@ -98,29 +101,24 @@
         <div class="bin-pill"><span class="pulse-dot"></span><span id="bin">Demo collection bin</span></div>
       </header>
 
-      <section class="dashboard-hero">
-        <div class="hero-copy">
-          <span class="eyebrow">YOUR IMPACT STARTS HERE</span>
-          <h2>Don't trash it.<br><span>Recycle it.</span></h2>
-          <p>Deposit batteries, chargers, cables and other small electronics at an EcoVault collection bin. Earn points for every verified deposit.</p>
-          <a class="hero-link" href="#deposit">Start a deposit <span>→</span></a>
-        </div>
-        <div class="hero-graphic" aria-hidden="true">
-          <div class="hero-ring"></div><div class="hero-chip">♻</div>
-          <span class="float-part part-a">▦</span><span class="float-part part-b">⌁</span><span class="float-part part-c">▣</span>
-          <small>REUSE • REPAIR • RECYCLE</small>
-        </div>
-      </section>
 
       <section class="stats-grid">
-        <article class="stat-card"><div class="stat-top"><span>AVAILABLE POINTS</span><span class="stat-icon">✦</span></div><strong id="pts">0</strong><small>Ready to redeem</small></article>
         <article class="stat-card"><div class="stat-top"><span>TOTAL E-WASTE</span><span class="stat-icon">▤</span></div><strong id="kg">0.00 kg</strong><small>Material diverted from waste</small></article>
-        <article class="stat-card"><div class="stat-top"><span>DEPOSITS MADE</span><span class="stat-icon">♻</span></div><strong id="num">0</strong><small>Successful deposits</small></article>
-        <article class="stat-card"><div class="stat-top"><span>VOUCHER VALUE</span><span class="stat-icon">₹</span></div><strong id="cash">₹0</strong><small>Available reward value</small></article>
+        <article class="stat-card"><div class="stat-top"><span>DUSTBIN USES</span><span class="stat-icon">♻</span></div><strong id="num">0</strong><small>Times you used the bin</small></article>
+        <article class="stat-card"><div class="stat-top"><span>REWARD POINTS</span><span class="stat-icon">✦</span></div><strong id="pts">0</strong><small>Worth <span id="cash">₹0</span> in vouchers</small></article>
+      </section>
+      <div class="page-links">
+        <a class="primary-button" href="#deposit">Add waste entry <span>→</span></a>
+        <a class="outline-button" href="#history">View history <span>→</span></a>
+      </div>
       </section>
 
-      <section class="content-grid">
-        <article class="dashboard-card deposit-card" id="deposit">
+      <!-- PAGE: WASTE ENTRY -->
+      <section class="page" data-page="deposit" hidden>
+      <div class="page-title"><span class="eyebrow">WASTE ENTRY</span><h1>Add your e-waste</h1><p class="muted">Open the bin, drop your item and confirm the weight to earn points.</p></div>
+
+      <section class="single-grid">
+        <article class="dashboard-card deposit-card">
           <div class="section-heading"><div><span class="eyebrow">01 / COLLECTION</span><h2>Make a new deposit</h2></div><span class="card-symbol">▣</span></div>
           <p class="muted">Follow the steps to deposit your accepted e-waste.</p>
           <div class="step-line"><span class="step-number">1</span><div><b>Open collection bin</b><small>Request the bin lid to unlock.</small></div></div>
@@ -130,31 +128,79 @@
             <div class="step-line"><span class="step-number">2</span><div><b>Enter deposit details</b><small>Demo mode uses manual weight entry.</small></div></div>
             <label class="field"><span>E-waste category</span>
               <select id="type">
-                <option>Battery</option><option>Cable / Wire</option><option>Charger</option><option>Earphones</option><option>Mobile phone</option><option>Computer component</option><option>Other small e-waste</option>
+                <option value="Battery">Battery — 150 pts / kg</option>
+                <option value="Board">Board — 200 pts / kg</option>
+                <option value="Wires & other">Wires &amp; other — 80 pts / kg</option>
               </select>
             </label>
+            <p id="pointsPreview" class="small-note">Enter weight to see your points.</p>
             <label class="field"><span>Measured weight (kg)</span><input id="weight" type="number" min="0.01" max="20" step="0.01" placeholder="Example: 0.25"></label>
             <button class="primary-button" id="finish">Confirm deposit <span>✓</span></button>
           </div>
           <p class="small-note">Demo prototype: live sensor readings and physical lid control require a connected backend and bin controller.</p>
         </article>
+      </section>
 
-        <article class="dashboard-card rewards-card" id="rewards">
-          <div class="section-heading"><div><span class="eyebrow">02 / REWARD WALLET</span><h2>Recycle. Earn. Redeem.</h2></div><span class="card-symbol">✦</span></div>
+      </section>
+
+      <!-- PAGE: REWARDS -->
+      <section class="page" data-page="rewards" hidden>
+      <div class="page-title"><span class="eyebrow">REWARD WALLET</span><h1>Claim your rewards</h1><p class="muted">Redeem 50 points for a ₹5 voucher.</p></div>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>AVAILABLE POINTS</span><span class="stat-icon">✦</span></div><strong id="rwPts">0</strong><small>Ready to redeem</small></article>
+        <article class="stat-card"><div class="stat-top"><span>VOUCHER VALUE</span><span class="stat-icon">₹</span></div><strong id="rwCash">₹0</strong><small><span id="rwCount">0</span> voucher(s) available</small></article>
+        <article class="stat-card"><div class="stat-top"><span>NEXT VOUCHER</span><span class="stat-icon">→</span></div><strong id="rwNext">50</strong><small>Points needed for next voucher</small></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="dashboard-card rewards-card">
+          <div class="section-heading"><div><span class="eyebrow">CLAIM</span><h2>Recycle. Earn. Redeem.</h2></div><span class="card-symbol">✦</span></div>
           <div class="voucher-art"><span>♻</span><div><small>ECOVAULT REWARD</small><b>₹5 VOUCHER</b><small>50 POINTS</small></div></div>
-          <p class="muted">Collect points every time you recycle. Redeem 50 points for a sample ₹5 voucher.</p>
-          <button class="outline-button" id="redeem">Redeem 50 points <span>→</span></button>
+          <button class="outline-button" id="redeem">Claim ₹5 voucher (50 points) <span>→</span></button>
           <p id="voucher" class="voucher-message" aria-live="polite"></p>
+          <a class="text-link" href="#claims">View claim history →</a>
           <p class="small-note">Voucher codes generated in demo mode are samples, not live gift cards.</p>
+        </article>
+
+        <article class="dashboard-card">
+          <div class="section-heading"><div><span class="eyebrow">HOW TO EARN</span><h2>Points per kg</h2></div><span class="card-symbol">▤</span></div>
+          <div class="table-wrap">
+            <table><thead><tr><th>WASTE TYPE</th><th>POINTS / KG</th></tr></thead>
+              <tbody><tr><td>Board</td><td>200</td></tr><tr><td>Battery</td><td>150</td></tr><tr><td>Wires &amp; other</td><td>80</td></tr></tbody>
+            </table>
+          </div>
+          <a class="primary-button page-cta" href="#deposit">Add waste entry <span>→</span></a>
         </article>
       </section>
 
-      <section class="dashboard-card history-card" id="history">
-        <div class="section-heading"><div><span class="eyebrow">03 / YOUR ACTIVITY</span><h2>Deposit history</h2></div><span class="card-symbol">▤</span></div>
+      </section>
+
+      <!-- PAGE: HISTORY -->
+      <section class="page" data-page="history" hidden>
+      <div class="page-title"><span class="eyebrow">YOUR ACTIVITY</span><h1>Waste history</h1><p class="muted">Every e-waste deposit you made at the bin. Voucher claims are on the Claim history page.</p></div>
+      <section class="dashboard-card history-card">
         <div class="table-wrap">
           <table><thead><tr><th>DATE & TIME</th><th>E-WASTE TYPE</th><th>WEIGHT</th><th>POINTS</th></tr></thead><tbody id="rows"></tbody></table>
         </div>
       </section>
+      </section>
+      <!-- PAGE: CLAIM HISTORY -->
+      <section class="page" data-page="claims" hidden>
+      <div class="page-title"><span class="eyebrow">YOUR CLAIMS</span><h1>Claim history</h1><p class="muted">Every voucher you claimed with your reward points.</p></div>
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>VOUCHERS CLAIMED</span><span class="stat-icon">✦</span></div><strong id="clCount">0</strong><small>Total claims</small></article>
+        <article class="stat-card"><div class="stat-top"><span>TOTAL VALUE</span><span class="stat-icon">₹</span></div><strong id="clValue">₹0</strong><small>Value of all vouchers</small></article>
+        <article class="stat-card"><div class="stat-top"><span>POINTS USED</span><span class="stat-icon">♻</span></div><strong id="clPoints">0</strong><small>Points spent on vouchers</small></article>
+      </section>
+      <section class="dashboard-card history-card">
+        <div class="table-wrap">
+          <table><thead><tr><th>DATE & TIME</th><th>VOUCHER CODE</th><th>VALUE</th><th>POINTS</th><th>STATUS</th></tr></thead><tbody id="claimRows"></tbody></table>
+        </div>
+      </section>
+      <div class="page-links"><a class="primary-button" href="#rewards">Claim a new voucher <span>→</span></a></div>
+      </section>
+
       <footer class="dashboard-footer">♻ ECOVAULT <span>Give electronics a second life.</span></footer>
     </main>
   </section>
